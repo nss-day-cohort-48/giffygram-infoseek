@@ -1,0 +1,53 @@
+.directMessage {
+    padding: 0.75rem 2rem 2rem 2rem;
+    margin: 5rem 25% 0 25%;
+    background-color: aliceblue;
+    position: relative;
+}
+
+.message__input {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.select--friends {
+    width: initial;
+    margin: 0.5rem;
+    font-size: large;
+}
+
+.message__section {
+    font-size: large;
+    margin: 0.75rem;
+    width: max-content;
+}
+
+#directMessage__close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.35rem;
+    width: 1rem;
+    height: 1rem;
+    line-height: 0;
+}
+
+.messages {
+    padding: 7rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.message {
+    border: 1px dotted lightblue;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
+    margin: 0 25%;
+    flex-basis: 50%;
+}
+
+.message__author {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}

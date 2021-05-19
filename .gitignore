@@ -1,0 +1,6 @@
+node_modules
+*.json
+.vscode
+dist
+.DS_Store
+
