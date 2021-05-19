@@ -10,3 +10,7 @@ const applicationState = {
         displayMessages: false
     }
 }
+
+export const getUsers = () => {
+    return [...applicationState.currentUser]
+}
