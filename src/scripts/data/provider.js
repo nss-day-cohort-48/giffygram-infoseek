@@ -82,7 +82,7 @@ export const fetchFollows = () => {
         .then(response => response.json())
         .then(
             (follows) => {
-                applicationState.users = follows
+                applicationState.follows = follows
             }
         )
 }
