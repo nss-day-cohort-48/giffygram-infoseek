@@ -1,3 +1,4 @@
+import { PostList } from "../feed/PostList.js";
 import { MessageForm } from "../message/MessageForm.js";
 const applicationElement = document.querySelector(".giffygram")
 
@@ -34,6 +35,7 @@ applicationElement.addEventListener("click", clickEvent => {
         applicationElement.innerHTML = `
         ${NavBar()}
         ${MessageForm()}
+        ${PostList()}
         `
     }
 })
@@ -48,6 +50,7 @@ applicationElement.addEventListener("click", clickEvent => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logout") {
-        
+        localStorage.removeItem('gg_user')
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
