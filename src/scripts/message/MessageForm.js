@@ -8,7 +8,7 @@ export const MessageForm = () => {
         <div class="directMessage">
             <div class="dropdown select--friends">
                 <lable>Recipient:</lable>
-                <select class="select--friends">
+                <select name="directMessage__userSelect" class="message__input">
                     <option value="default">Select a user...</option>
                     ${users.map(u => {
                         return `<option value="user--${u.id}">${u.name}</option>`
@@ -17,7 +17,7 @@ export const MessageForm = () => {
             </div>
             <div class="message__section">
                 <lable for="message">Message:</lable>
-                <input type="text" name="text" autofocus placeholder="Enter message here" />
+                <input type="text" name="message" class="message__input" autofocus placeholder="Enter message here" />
             </div>
             <button id="directMessage__submit">Save</button>
             <button id="directMessage__cancel">Cancel</button>
