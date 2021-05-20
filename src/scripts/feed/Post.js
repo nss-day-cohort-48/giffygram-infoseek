@@ -7,16 +7,16 @@ import { getUsers } from "../data/provider.js"
 export const Post = (postObject) => {
 
     const users = getUsers()
-   let foundUser = users.find(userObject => {
-       if (userObject.id === postObject.userId){
+    let foundUser = users.find(userObject => {
+        if (userObject.id === postObject.userId){
            return userObject
-       }
-   })
+        }
+    })
 
   let postHTML = `
         <div class="post"> 
         <h2>${postObject.title}</h2>
-        <img src="${postObject.gifUrl}" alt="${postObject.discription}"/>
+        <img src="${postObject.gifURL}" alt="${postObject.description}"/>
         posted by ${foundUser.name} on ${postObject.timestamp}
         </div>
         `
