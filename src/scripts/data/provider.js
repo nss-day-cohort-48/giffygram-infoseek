@@ -48,7 +48,7 @@ export const fetchUsers = () => {
 }
 
 export const fetchPosts = () => {
-    return fetch(`${apiURURL}/posts`)
+    return fetch(`${apiURL}/posts`)
         .then(response => response.json())
         .then(
             (posts) => {
@@ -58,7 +58,7 @@ export const fetchPosts = () => {
 }
 
 export const fetchLikes = () => {
-    return fetch(`${apiURURL}/likes`)
+    return fetch(`${apiURL}/likes`)
         .then(response => response.json())
         .then(
             (likes) => {
@@ -68,7 +68,7 @@ export const fetchLikes = () => {
 }
 
 export const fetchMessages = () => {
-    return fetch(`${apiURURL}/messages`)
+    return fetch(`${apiURL}/messages`)
         .then(response => response.json())
         .then(
             (messages) => {
@@ -78,7 +78,7 @@ export const fetchMessages = () => {
 }
 
 export const fetchFollows = () => {
-    return fetch(`${apiURURL}/follows`)
+    return fetch(`${apiURL}/follows`)
         .then(response => response.json())
         .then(
             (follows) => {
