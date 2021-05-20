@@ -37,7 +37,7 @@ export const getFollows = () => {
 }
 
 export const fetchUsers = () => {
-    return fetch(`${apiURL}}/users`) //accessing giffygram.json (whose address is stored in the apiURL const defined at the top of the page) /users
+    return fetch(`${apiURL}/users`) //accessing giffygram.json (whose address is stored in the apiURL const defined at the top of the page) /users
         .then(response => response.json())
         .then(
             (users) => {
