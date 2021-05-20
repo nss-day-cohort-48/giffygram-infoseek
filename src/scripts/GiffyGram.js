@@ -6,6 +6,5 @@ export const GiffyGram = () => {
     // Show main main UI
     return `
     ${NavBar()}
-    ${MessageForm()}
     `
 }

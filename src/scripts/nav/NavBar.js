@@ -1,4 +1,5 @@
-
+import { MessageForm } from "../message/MessageForm.js";
+const applicationElement = document.querySelector(".giffygram")
 
 export const NavBar = () => {
     return `
@@ -21,3 +22,32 @@ export const NavBar = () => {
     </nav>
     `
 }
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "logo") {
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessageIcon") {
+        applicationElement.innerHTML = `
+        ${NavBar()}
+        ${MessageForm()}
+        `
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.class === "notification__count") {
+        applicationElement.innerHTML = `
+        ${NavBar()}
+        `
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "logout") {
+        
+    }
+})
