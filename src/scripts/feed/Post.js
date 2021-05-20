@@ -14,11 +14,18 @@ export const Post = (postObject) => {
     })
 
   let postHTML = `
-        <div class="post"> 
-        <h2>${postObject.title}</h2>
-        <img src="${postObject.gifURL}" alt="${postObject.description}"/>
-        posted by ${foundUser.name} on ${postObject.timestamp}
-        </div>
+        <section class="post"> 
+            <h2 class="post__title">${postObject.title}</h2>
+            <img class="post__image" src="${postObject.gifURL}" alt="${postObject.description}"/>
+            <div class="post__description">
+                ${postObject.description}
+            </div>
+            <div class="post__tagline">
+                Posted by 
+                <a href="#" class="profileLink" id="profile--1">${foundUser.name}</a>
+                on ${postObject.timestamp}
+            </div>
+        </section>
         `
     return postHTML
 }
