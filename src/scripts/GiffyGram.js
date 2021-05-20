@@ -1,9 +1,9 @@
-import {  } from "module";
+import { MessageForm } from "./message/MessageForm.js"
 
 export const GiffyGram = () => {
 
     // Show main main UI
-    return `
-    ${NavBar()}
-    <h1>Giffygram</h1>`
+    return `<h1>Giffygram</h1>
+    ${MessageForm()}
+    `
 }
