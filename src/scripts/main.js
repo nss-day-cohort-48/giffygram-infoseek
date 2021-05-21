@@ -19,7 +19,6 @@ export const renderApp = () => {
                 if (user) {
                     setCurrentUser(user)
                     const currentUser = getCurrentUser()
-                    console.log('currentUser: ', currentUser);
                     applicationElement.innerHTML = GiffyGram()
                 } else {
                     applicationElement.innerHTML = LoginForm()
