@@ -111,3 +111,38 @@ export const sendPost = (postObj) => {
         }
     )
 }
+
+export const sendLike = (likeObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(likeObj)
+    }
+    return fetch(`${apiURL}/likes`, fetchOptions)
+    .then(response => response.json)
+    .then(
+        () => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+}
+
+export const deletePost = (postId) => {
+    return fetch(`${apiURL}/posts/${postId}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const deleteLike = (likeId) => {
+    return fetch(`${apiURL}/likes/${likeId}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
