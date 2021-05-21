@@ -34,7 +34,7 @@ applicationElement.addEventListener(
             if (event.target.id === "newPost__submit" ) {
             const postTitle = document.querySelector("input[name='postTitle']").value
             const postURL = document.querySelector("input[name='postURL']").value
-            const postDescription = document.querySelector("input[name='postDescription']").value
+            const postDescription = document.querySelector("textarea[name='postDescription']").value
             const postTimestamp = Date.now()
             const currentUser = getCurrentUser()
 
