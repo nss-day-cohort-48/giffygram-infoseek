@@ -51,3 +51,9 @@ applicationElement.addEventListener("click", clickEvent => {
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessage__close") {
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
