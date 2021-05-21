@@ -1,5 +1,5 @@
 
-import { getUsers } from "./provider.js"
+import { getUsers } from "../data/provider.js"
 
 
 export const DirectMessage = (message) => {
