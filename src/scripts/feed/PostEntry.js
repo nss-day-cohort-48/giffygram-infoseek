@@ -23,7 +23,7 @@ applicationElement.addEventListener(
     "click",
     event => {
         if (event.target.id === "newPost__cancel" ) {
-            
+            applicationElement.dispatchEvent = new CustomEvent("stateChanged")
         } 
     }
     )
