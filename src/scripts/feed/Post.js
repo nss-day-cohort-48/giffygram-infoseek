@@ -44,9 +44,7 @@ export const Post = (postObject) => {
         ${postObject.description}
         </div>
         <div class="post__tagline">
-        Posted by 
-        <a href="#" class="profileLink" id="profile--1">${foundUser.name}</a>
-        on ${new Date(timestamp).toLocaleDateString("en-US")}
+        Posted by ${foundUser.name} on ${new Date(timestamp).toLocaleDateString("en-US")}
         </div>
         <div class="post__actions">
         ${likedPost}
