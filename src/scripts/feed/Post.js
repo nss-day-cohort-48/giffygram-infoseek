@@ -54,6 +54,7 @@ export const Post = (postObject) => {
         </div>
         </section>
         `
+    
     return postHTML
 }
 

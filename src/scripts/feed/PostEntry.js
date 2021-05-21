@@ -23,12 +23,12 @@ applicationElement.addEventListener(
     "click",
     event => {
         if (event.target.id === "newPost__cancel" ) {
-            applicationElement.dispatchEvent = new CustomEvent("stateChanged")
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         } 
     }
-    )
+)
     
-    applicationElement.addEventListener(
+applicationElement.addEventListener(
         "click",
         event => {
             if (event.target.id === "newPost__submit" ) {

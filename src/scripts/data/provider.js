@@ -107,7 +107,7 @@ export const sendPost = (postObj) => {
     .then(response => response.json)
     .then(
         () => {
-            applicationElement.dispatchEvent = new CustomEvent("stateChanged")
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         }
     )
 }
