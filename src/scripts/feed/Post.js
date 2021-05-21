@@ -1,4 +1,4 @@
-import { getUsers } from "../data/provider.js"
+import { getLikes, getUsers } from "../data/provider.js"
 
 // function that returns html for post
 
@@ -13,12 +13,57 @@ export const Post = (postObject) => {
         }
     })
 
-  let postHTML = `
-        <div class="post"> 
-        <h2>${postObject.title}</h2>
-        <img src="${postObject.gifURL}" alt="${postObject.description}"/>
-        posted by ${foundUser.name} on ${postObject.timestamp}
+    const timestamp = postObject.timestamp
+
+    const likes = getLikes()
+    const likedPost = likes.find(likeObj => {
+        if (postObject.id === likeObj.postId) {
+            return likeObj
+        }
+    })
+
+    let postHTML = ""
+
+    if (likedPost === undefined) {
+        postHTML = `
+        <section class="post"> 
+        <h2 class="post__title">${postObject.title}</h2>
+        <img class="post__image" src="${postObject.gifURL}" alt="${postObject.description}"/>
+        <div class="post__description">
+        ${postObject.description}
         </div>
+        <div class="post__tagline">
+        Posted by 
+        <a href="#" class="profileLink" id="profile--1">${foundUser.name}</a>
+        on ${new Date(timestamp).toLocaleDateString("en-US")}
+        </div>
+        <div class="post__actions">
+        <div>
+        <img id="favoritePost--${postObject.id}" class="actionIcon" src="/images/favorite-star-blank.svg"
+        </div>
+        </div>
+        </section>
         `
+    } else {
+        postHTML = `
+        <section class="post"> 
+        <h2 class="post__title">${postObject.title}</h2>
+        <img class="post__image" src="${postObject.gifURL}" alt="${postObject.description}"/>
+        <div class="post__description">
+        ${postObject.description}
+        </div>
+        <div class="post__tagline">
+        Posted by 
+        <a href="#" class="profileLink" id="profile--1">${foundUser.name}</a>
+        on ${new Date(timestamp).toLocaleDateString("en-US")}
+        </div>
+        <div class="post__actions">
+        <div>
+        <img id="favoritePost--${postObject.id}" class="actionIcon" src="/images/favorite-star-yellow.svg"
+        </div>
+        </div>
+        </section>
+        `
+    }
     return postHTML
 }

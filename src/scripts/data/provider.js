@@ -94,3 +94,20 @@ export const fetchFollows = () => {
             }
         )
 }
+
+export const sendPost = (postObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postObj)
+    }
+    return fetch(`${apiURL}/posts`, fetchOptions)
+    .then(response => response.json)
+    .then(
+        () => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+}
