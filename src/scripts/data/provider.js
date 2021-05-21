@@ -13,7 +13,8 @@ const applicationState = {
         chosenUser: null,
         displayFavorites: false,
         displayMessages: false
-    }
+    },
+    filters: {}
 }
 
 export const setCurrentUser = (id) => {
@@ -42,6 +43,10 @@ export const getMessages = () => {
 
 export const getFollows = () => {
     return [...applicationState.follows]
+}
+
+export const getFilters = () => {
+    return { ...applicationState.filters }
 }
 
 export const fetchUsers = () => {
@@ -110,4 +115,16 @@ export const sendPost = (postObj) => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         }
     )
+}
+
+export const setDateFilter = (date) => {
+    applicationState.filters.date = date
+}
+
+export const setUserFilter = (userId) => {
+    applicationState.filters.userId = userId
+}
+
+export const setFavoritesFilter = (isChecked) => {
+    applicationState.filters.favoritesOnly = isChecked
 }

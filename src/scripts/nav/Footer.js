@@ -1,19 +1,13 @@
-import { getLikes, getPosts, getUsers } from "../data/provider.js"
+import { getLikes, getPosts, getUsers, setDateFilter, setUserFilter, getFilters } from "../data/provider.js"
+import { PostList } from "../feed/PostList.js";
 
-
-const posts = getPosts()
-const users = getUsers()
-const likes = getLikes()
-
-users.filter(u => {
-    if (u.id === posts.filter(p => {
-        return p.userId
-    }).userId) {
-        return posts
-    }
-})
+const applicationElement = document.querySelector(".giffygram")
 
 export const Footer = () => {
+    const posts = getPosts()
+    const users = getUsers()
+    const likes = getLikes()
+
     return `
     <footer class="footer">
         <div class="footer__item">
@@ -23,7 +17,12 @@ export const Footer = () => {
         </div>
         <div class="footer__item">
             Posts by user
-            <select id="userSelection" ></select>
+            <select id="userSelection" >
+            <option value="default">Select a user...</option>
+            ${users.map(u => {
+                return `<option value="user--${u.id}">${u.name}</option>`
+            }).join("")}
+            </select>
         </div>
         <div class="footer__item">
             Show only favorites
@@ -32,3 +31,37 @@ export const Footer = () => {
     </footer>
     `
 }
+
+applicationElement.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "yearSelection") {
+            const date = event.target.value
+            setDateFilter(date)
+
+            const mainFeed = document.querySelector(".giffygram__feed")
+            mainFeed.innerHTML = PostList()
+
+            const filters = getFilters()
+            const postCount = document.querySelector("#postCount")
+            postCount.innerHTML = filters.postCount
+        }
+    }
+)
+
+applicationElement.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "userSelection") {
+            const [, userId] = event.target.value.split("--")
+            setUserFilter(parseInt(userId))
+
+            const mainFeed = document.querySelector(".giffygram__feed")
+            mainFeed.innerHTML = PostList()
+
+            const filters = getFilters()
+            const postCount = document.querySelector("#postCount")
+            postCount.innerHTML = filters.postCount
+        }
+    }
+)
