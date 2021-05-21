@@ -1,5 +1,6 @@
 import { NavBar } from "./nav/NavBar.js";
 import { PostList } from "./feed/PostList.js";
+import { Footer } from "./nav/Footer.js";
 
 export const GiffyGram = () => {
 
@@ -7,5 +8,6 @@ export const GiffyGram = () => {
     return `
     ${NavBar()}
     ${PostList()}
+    ${Footer()}
     `
 }
