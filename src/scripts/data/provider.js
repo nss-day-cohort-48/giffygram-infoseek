@@ -94,3 +94,46 @@ export const fetchFollows = () => {
             }
         )
 }
+
+export const sendPost = (postObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postObj)
+    }
+    return fetch(`${apiURL}/posts`, fetchOptions)
+    .then(response => response.json)
+    .then(
+        () => {
+            applicationElement.dispatchEvent = new CustomEvent("stateChanged")
+        }
+    )
+}
+
+export const sendLike = (likeObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(likeObj)
+    }
+    return fetch(`${apiURL}/likes`, fetchOptions)
+    .then(response => response.json)
+    .then(
+        () => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+}
+
+export const deleteLike = (likeId) => {
+    return fetch(`${apiURL}/likes/${likeId}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
