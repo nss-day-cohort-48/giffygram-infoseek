@@ -16,6 +16,14 @@ const applicationState = {
     }
 }
 
+export const setCurrentUser = (id) => {
+    return applicationState.currentUser = id
+}
+
+export const getCurrentUser = () => {
+    return applicationState.currentUser
+}
+
 export const getUsers = () => {
     return [...applicationState.users]
 }
