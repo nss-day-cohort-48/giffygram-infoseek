@@ -1,4 +1,4 @@
-import { deleteLike, getCurrentUser, getLikes, getUsers, sendLike } from "../data/provider.js"
+import { deleteLike, deletePost, getCurrentUser, getLikes, getUsers, sendLike } from "../data/provider.js"
 const applicationElement = document.querySelector(".giffygram")
 
 
@@ -79,5 +79,9 @@ applicationElement.addEventListener("click", clickEvent => {
 })
 
 applicationElement.addEventListener("click", clickEvent => {
-
+    if (clickEvent.target.id.startsWith("blockPost--")) {
+        const [, postIdString] = clickEvent.target.id.split("--")
+        const postId = parseInt(postIdString)
+        deletePost(postId)
+    }
 })

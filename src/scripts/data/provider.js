@@ -129,6 +129,15 @@ export const sendLike = (likeObj) => {
     )
 }
 
+export const deletePost = (postId) => {
+    return fetch(`${apiURL}/posts/${postId}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
 export const deleteLike = (likeId) => {
     return fetch(`${apiURL}/likes/${likeId}`, { method: "DELETE" })
         .then(
