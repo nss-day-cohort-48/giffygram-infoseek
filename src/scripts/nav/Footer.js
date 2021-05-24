@@ -39,12 +39,7 @@ applicationElement.addEventListener(
             const date = event.target.value
             setDateFilter(date)
 
-            const mainFeed = document.querySelector(".giffygram__feed")
-            mainFeed.innerHTML = PostList()
-
-            const filters = getFilters()
-            const postCount = document.querySelector("#postCount")
-            postCount.innerHTML = filters.postCount
+            PostList()
         }
     }
 )
@@ -56,12 +51,7 @@ applicationElement.addEventListener(
             const [, userId] = event.target.value.split("--")
             setUserFilter(parseInt(userId))
 
-            const mainFeed = document.querySelector(".giffygram__feed")
-            mainFeed.innerHTML = PostList()
-
-            const filters = getFilters()
-            const postCount = document.querySelector("#postCount")
-            postCount.innerHTML = filters.postCount
+            PostList()
         }
     }
 )

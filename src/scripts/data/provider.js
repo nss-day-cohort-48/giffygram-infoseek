@@ -12,6 +12,7 @@ const applicationState = {
     feed: {
         chosenUser: null,
         displayFavorites: false,
+        chosenYear: null,
         displayMessages: false
     },
     filters: {}
