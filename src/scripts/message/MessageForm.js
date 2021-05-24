@@ -11,8 +11,8 @@ export const MessageForm = () => {
                 <select name="directMessage__userSelect" class="message__input">
                     <option value="default">Select a user...</option>
                     ${users.map(u => {
-        return `<option value="user--${u.id}">${u.name}</option>`
-    }).join("")}
+                    return `<option value="user--${u.id}">${u.name}</option>`
+                    }).join("")}
                 </select>   
             </div>
             <div class="message__section">
