@@ -1,12 +1,19 @@
-import { getLikes, getPosts, getUsers, setChosenUser, getFeed, setDisplayFavorites } from "../data/provider.js"
+import { getUsers, setChosenUser, setChosenYear, getFeed, setDisplayFavorites } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
 export const Footer = () => {
-    const posts = getPosts()
     const users = getUsers()
-    const likes = getLikes()
     const feed = getFeed()
+    
+    let years = ""
+    for (let i = 2017; i <= 2021; i++) {
+        if (feed.chosenYear === i) {
+            years += `<option value="${i}" selected="selected">${i}</option>`
+        } else {
+            years += `<option value="${i}">${i}</option>`
+        }
+    }
     
     let showOnlyFavorites = ""
     if (feed.displayFavorites === false) {
@@ -20,11 +27,7 @@ export const Footer = () => {
         <div class="footer__item">
             Posts since
             <select id="yearSelection">
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
+                ${years}
                 </select>
             </select>
             <span id="postCount"></span>
@@ -56,7 +59,7 @@ applicationElement.addEventListener(
         if (event.target.id === "yearSelection") {
             const dropdown = document.querySelector("select[id='yearSelection']")
             const year = dropdown.options[dropdown.selectedIndex].value
-            setDateFilter(parseInt(year))
+            setChosenYear(parseInt(year))
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         }
     }

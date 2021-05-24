@@ -35,6 +35,8 @@ export const setDisplayFavorites = (boolean) => {
 
 export const setChosenYear = (year) => {
     applicationState.feed.chosenYear = year
+    applicationState.feed.chosenUser = null
+    applicationState.feed.displayFavorites = false
 }
 
 export const getCurrentUser = () => {
