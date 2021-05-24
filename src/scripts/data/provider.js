@@ -129,6 +129,23 @@ export const sendLike = (likeObj) => {
     )
 }
 
+export const sendMessage = (messageObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(messageObj)
+    }
+    return fetch(`${apiURL}/messages`, fetchOptions)
+    .then(response => response.json)
+    .then(
+        () => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+}
+
 export const deletePost = (postId) => {
     return fetch(`${apiURL}/posts/${postId}`, { method: "DELETE" })
         .then(
