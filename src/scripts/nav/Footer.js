@@ -1,4 +1,4 @@
-import { getLikes, getPosts, getUsers, setDateFilter, setChosenUser, getFeed, setDisplayFavorites } from "../data/provider.js"
+import { getLikes, getPosts, getUsers, setChosenUser, getFeed, setDisplayFavorites } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 

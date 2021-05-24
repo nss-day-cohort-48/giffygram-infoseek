@@ -23,14 +23,18 @@ export const setCurrentUser = (id) => {
 
 export const setChosenUser = (id) => {
     applicationState.feed.chosenUser = id
-}
-
-export const setDateFilter = (year) => {
-    applicationState.feed.chosenYear = year
+    applicationState.feed.displayFavorites = false
+    applicationState.feed.chosenYear = null
 }
 
 export const setDisplayFavorites = (boolean) => {
     applicationState.feed.displayFavorites = boolean
+    applicationState.feed.chosenUser = null
+    applicationState.feed.chosenYear = null
+}
+
+export const setChosenYear = (year) => {
+    applicationState.feed.chosenYear = year
 }
 
 export const getCurrentUser = () => {
