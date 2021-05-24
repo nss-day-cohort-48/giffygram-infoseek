@@ -1,6 +1,6 @@
-import { getUsers } from "../data/provider.js";
+import { getCurrentUser, getUsers, sendMessage } from "../data/provider.js";
 
-
+const applicationElement = document.querySelector(".giffygram")
 
 export const MessageForm = () => {
     const users = getUsers()
@@ -11,8 +11,8 @@ export const MessageForm = () => {
                 <select name="directMessage__userSelect" class="message__input">
                     <option value="default">Select a user...</option>
                     ${users.map(u => {
-                        return `<option value="user--${u.id}">${u.name}</option>`
-                    }).join("")}
+        return `<option value="user--${u.id}">${u.name}</option>`
+    }).join("")}
                 </select>   
             </div>
             <div class="message__section">
@@ -25,3 +25,35 @@ export const MessageForm = () => {
         </div>
     `
 }
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessage__submit") {
+        const text = document.querySelector("input[name='message']").value
+        const dropdown = document.querySelector("select[name='directMessage__userSelect']")
+        const recipient = dropdown.options[dropdown.selectedIndex].value
+        const [, recipientIdString] = recipient.split("--")
+        const recipientId = parseInt(recipientIdString)
+        const currentUser = getCurrentUser()
+
+        const sendtoAPI = {
+            recipientId: recipientId,
+            userId: currentUser,
+            text: text,
+            read: false
+        }
+
+        sendMessage(sendtoAPI)
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessage__cancel") {
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessage__close") {
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
