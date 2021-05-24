@@ -7,7 +7,10 @@ export const GiffyGram = () => {
     // Show main main UI
     return `
     ${NavBar()}
-    ${PostList()}
+    <div class="giffygram__feed">
+        <div class="miniMode" id="miniMode" >Have a gif to post?</div>
+        ${PostList()}
+    </div>
     ${Footer()}
     `
 }
