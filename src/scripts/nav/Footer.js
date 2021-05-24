@@ -6,6 +6,14 @@ export const Footer = () => {
     const posts = getPosts()
     const users = getUsers()
     const likes = getLikes()
+    const feed = getFeed()
+    
+    let showOnlyFavorites = ""
+    if (feed.displayFavorites === false) {
+        showOnlyFavorites = `<input id="showOnlyFavorites" type="checkbox"/>`
+    } else {
+        showOnlyFavorites = `<input id="showOnlyFavorites" type="checkbox" checked="checked"/>`
+    }
 
     return `
     <footer class="footer">
@@ -24,15 +32,19 @@ export const Footer = () => {
         <div class="footer__item">
             Posts by user
             <select id="userSelection" >
-            <option value="default">Select a user...</option>
+            <option value="default">Everyone</option>
             ${users.map(u => {
-                return `<option value="user--${u.id}">${u.name}</option>`
+                if (feed.chosenUser === u.id) {
+                    return `<option value="user--${u.id}" selected="selected">${u.name}</option>`
+                } else {
+                    return `<option value="user--${u.id}">${u.name}</option>`
+                }
             }).join("")}
             </select>
         </div>
         <div class="footer__item">
             Show only favorites
-            <input id="showOnlyFavorites" type="checkbox" />
+            ${showOnlyFavorites}
         </div>
     </footer>
     `

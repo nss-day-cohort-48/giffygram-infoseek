@@ -1,5 +1,4 @@
 import { getFeed, getPosts, getUsers, getLikes, getCurrentUser } from "../data/provider.js";
-import { getPosts } from "../data/provider.js";
 import { NavBar } from "../nav/NavBar.js";
 import { Post } from "./Post.js";
 import { PostEntry } from "./PostEntry.js";
@@ -17,25 +16,13 @@ export const PostList = () => {
     let chosenYear = feed.chosenYear
     let displayMessages = feed.displayMessages 
 
-    let feedHTML = `
-    <div class="giffygram__feed">
-    <div class="miniMode" id="miniMode">Have a gif to post?</div>
-    ${
-        posts.map(Post).join("")
-    }
-    </div>
-    `
-    if (chosenUser) {
-        
+    const sortedPosts = posts.sort((a,b) => b.timestamp - a.timestamp)
+    let feedHTML = `${sortedPosts.map(Post).join("")}`
+    
+    if (chosenUser) {      
         const userPosts = posts.filter(post => post.userId === chosenUser)
-        feedHTML = `
-        <div class="giffygram__feed">
-    <div class="miniMode" id="miniMode">Have a gif to post?</div>
-    ${
-        userPosts.map(Post).join("")
-    }
-    </div>
-        `
+        const sortedUserPosts = userPosts.sort((a,b) => b.timestamp - a.timestamp)
+        feedHTML = `${sortedUserPosts.map(Post).join("")}`
     }
 
     if (displayFavorites === true) {
@@ -48,15 +35,8 @@ export const PostList = () => {
             }
         }
     }
-    
-    feedHTML = `
-    <div class="giffygram__feed">
-    <div class="miniMode" id="miniMode">Have a gif to post?</div>
-    ${
-        likedPosts.map(Post).join("")
-    }
-    </div>
-    `
+    const sortedLikedPosts = likedPosts.sort((a,b) => b.timestamp - a.timestamp)
+    feedHTML = `${likedPosts.map(Post).join("")}`
 }
 
 return feedHTML
