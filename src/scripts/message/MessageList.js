@@ -8,7 +8,9 @@ export const MessageList = () => {
     const messages = getMessages()
     
     return `
-    ${messages.map(DirectMessage).join("")}
+    <div class="messages">
+        ${messages.map(DirectMessage).join("")}
+    </div>
     `
 
 }
