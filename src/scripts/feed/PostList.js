@@ -34,24 +34,6 @@ export const PostList = () => {
         `
     }
 
-    if (chosenYear) {
-        const yearPosts = posts.filter(post => {
-            postYear = new Date(post.timestamp)
-            console.log(postYear)
-            if (postYear > chosenYear)
-            return post
-        })
-
-        feedHTML = `
-        <div class="giffygram__feed">
-    <div class="miniMode" id="miniMode">Have a gif to post?</div>
-    ${
-        yearPosts.map(Post).join("")
-    }
-    </div>
-        `
-    }
-
     if (displayFavorites === true) {
     let likedPosts = []
     const userLikes = likes.filter(like => currentUser === like.userId)
