@@ -1,4 +1,4 @@
-import { getCurrentUser, getMessages } from "../data/provider.js";
+import { getCurrentUser, getMessages, setChosenUser, setChosenYear, setDisplayFavorites } from "../data/provider.js";
 import { PostList } from "../feed/PostList.js";
 import { MessageForm } from "../message/MessageForm.js";
 import { MessageList } from "../message/MessageList.js"
@@ -30,6 +30,9 @@ export const NavBar = () => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logo") {
+        setChosenUser(null)
+        setDisplayFavorites(false)
+        setChosenYear(null)
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
