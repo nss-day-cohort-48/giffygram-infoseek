@@ -16,7 +16,11 @@ applicationElement.addEventListener(
                 password: userPassword
             }
 
-            sendUser(newUserObject)
+            if (userName === "" || userEmail === "" || userPassword === "") {
+                alert("Please enter all fields")
+            } else {
+                sendUser(newUserObject)
+            }
         }
     }
 )
