@@ -1,4 +1,4 @@
-import { getUsers } from "../data/provider.js"
+import { getUsers, setRegisterUser } from "../data/provider.js"
 import { renderApp } from "../main.js"
 import { Register } from "./Register.js"
 
@@ -28,7 +28,8 @@ document.addEventListener("click", clickEvent => {
 applicationElement.addEventListener(
     "click",
     event => {
-        if (event.target.id === "registerButton") {
+        if (event.target.id === "registerLink") {
+            setRegisterUser()
         }
     }
 )
@@ -37,6 +38,7 @@ export const LoginForm = () => {
     return `
         <div class="loginForm">
             <form>
+                <h1>Please login to Giffygram</h1>
                 <fieldset>
                     <label for="email">Email:</label>
                     <input type="text" name="email" autofocus placeholder="Email address" />
@@ -47,8 +49,12 @@ export const LoginForm = () => {
                 </fieldset>
             </form>
             <button id="loginButton">Login</button>
-            or
-            <button id="registerButton">Register a new user</button>
-        </div>
-    `
-}
+            <section>
+                <a href="#" id="registerLink">Not a member yet?</a>
+            </section>
+            </div>
+            `
+        }
+        
+        // or
+        // <button id="registerButton">Register a new user</button>

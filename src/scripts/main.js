@@ -1,6 +1,7 @@
 import { GiffyGram } from "./GiffyGram.js"
 import { LoginForm } from "./auth/Login.js";
-import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers, getCurrentUser, setCurrentUser } from "./data/provider.js";
+import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers, getCurrentUser, getRegisterUser, setCurrentUser } from "./data/provider.js";
+import { Register } from "./auth/Register.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -21,7 +22,12 @@ export const renderApp = () => {
                     const currentUser = getCurrentUser()
                     applicationElement.innerHTML = GiffyGram()
                 } else {
-                    applicationElement.innerHTML = LoginForm()
+                    const registerStateChange = getRegisterUser()
+                    if (registerStateChange === true) {
+                        applicationElement.innerHTML = Register()
+                    } else {
+                        applicationElement.innerHTML = LoginForm()
+                    }
                 }
             }
         )
@@ -29,6 +35,7 @@ export const renderApp = () => {
 
 renderApp()
 
-applicationElement.addEventListener("stateChanged",
+applicationElement.addEventListener(
+    "stateChanged",
     customEvent => {renderApp()}
 )

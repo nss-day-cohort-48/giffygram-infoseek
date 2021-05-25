@@ -15,7 +15,17 @@ const applicationState = {
         chosenYear: null,
         displayMessages: false
     },
-    filters: {}
+    filters: {},
+    registerUser: false
+}
+
+export const getRegisterUser = () => {
+    return applicationState.registerUser
+}
+
+export const setRegisterUser = () => {
+    applicationState.registerUser = true
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
 export const setCurrentUser = (id) => {

@@ -5,7 +5,7 @@ applicationElement.addEventListener(
     "click",
     event => {
         if (event.target.id === "submitButton") {
-
+            
         }
     }
 )
@@ -30,6 +30,8 @@ export const Register = () => {
                 </fieldset>
             </form>
             <button id="submitButton">Submit</button>
+            or
+            <button id="return">Return to Login</button>
         </div>
     `
 }
