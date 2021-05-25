@@ -1,4 +1,6 @@
-import { deleteLike, deletePost, getCurrentUser, getLikes, getUsers, sendLike } from "../data/provider.js"
+import { deleteLike, deletePost, getCurrentUser, getLikes, getUsers, sendLike, setUserProfile } from "../data/provider.js"
+import { NavBar } from "../nav/NavBar.js";
+import { UserProfile } from "../friends/UserProfile.js";
 const applicationElement = document.querySelector(".giffygram")
 
 
@@ -44,7 +46,7 @@ export const Post = (postObject) => {
         ${postObject.description}
         </div>
         <div class="post__tagline">
-        Posted by ${foundUser.name} on ${new Date(timestamp).toLocaleDateString("en-US")}
+        Posted by <span class="profileLink" id="profile--${foundUser.id}">${foundUser.name}</span> on ${new Date(timestamp).toLocaleDateString("en-US")}
         </div>
         <div class="post__actions">
         ${likedPost}
@@ -84,3 +86,13 @@ applicationElement.addEventListener("click", clickEvent => {
         deletePost(postId)
     }
 })
+
+applicationElement.addEventListener("click", event => {
+    if (event.target.class = "profileLink") {
+        const [, profileId] = event.target.id.split("--")
+        setUserProfile(parseInt(profileId))
+        applicationElement.innerHTML = `${NavBar()}
+        ${UserProfile()}`
+    }
+}
+)

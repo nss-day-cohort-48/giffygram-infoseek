@@ -9,6 +9,7 @@ const applicationState = {
     messages: [],
     follows: [],
     currentUser: {},
+    userProfile: {},
     feed: {
         chosenUser: null,
         displayFavorites: false,
@@ -18,7 +19,11 @@ const applicationState = {
 }
 
 export const setCurrentUser = (id) => {
-    return applicationState.currentUser = id
+    applicationState.currentUser = id
+}
+
+export const setUserProfile = (id) => {
+    applicationState.userProfile = id
 }
 
 export const setChosenUser = (id) => {
@@ -41,6 +46,10 @@ export const setChosenYear = (year) => {
 
 export const getCurrentUser = () => {
     return applicationState.currentUser
+}
+
+export const getUserProfile = () => {
+    return applicationState.userProfile
 }
 
 export const getUsers = () => {
