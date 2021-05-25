@@ -1,5 +1,7 @@
-import { getUsers } from "../data/provider.js"
+import { getUsers, setRegisterUser } from "../data/provider.js"
+import { renderApp } from "../main.js"
 
+const applicationElement = document.querySelector(".giffygram")
 
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
@@ -22,10 +24,20 @@ document.addEventListener("click", clickEvent => {
     }
 })
 
+applicationElement.addEventListener(
+    "click",
+    event => {
+        if (event.target.id === "registerLink") {
+            setRegisterUser()
+        }
+    }
+)
+
 export const LoginForm = () => {
     return `
         <div class="loginForm">
             <form>
+                <h1>Please login to Giffygram</h1>
                 <fieldset>
                     <label for="email">Email:</label>
                     <input type="text" name="email" autofocus placeholder="Email address" />
@@ -36,6 +48,9 @@ export const LoginForm = () => {
                 </fieldset>
             </form>
             <button id="loginButton">Login</button>
-        </div>
-    `
-}
+            <section>
+                <a href="#" id="registerLink">Not a member yet?</a>
+            </section>
+            </div>
+            `
+        }
