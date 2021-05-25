@@ -11,8 +11,8 @@ export const DirectMessage = (message) => {
 
     let directMessageHTML = `
     <div class="message" id="message--${message.id}">
-    <div class="message__author">From ${foundUser.name}</div>
-    <div class="message__text">${message.text}</div>
+        <div class="message__author">From ${foundUser.name}</div>
+        <div class="message__text">${message.text}</div>
     </div>
     `
     return directMessageHTML

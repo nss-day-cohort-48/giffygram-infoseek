@@ -8,7 +8,7 @@ export const MessageList = () => {
     const currentUser = getCurrentUser()
     const messages = getMessages()
 
-    
+    let html = `<div class="messages"><div class="messageList">`
     const currentUserMessages = messages.filter(message => {
         if (message.recipientId === currentUser) {
             return true
@@ -21,11 +21,13 @@ export const MessageList = () => {
             const messageHTML = DirectMessage(messageObject)
             return messageHTML
         })
-        return messageArrayOfStrings.join("")
+        html += messageArrayOfStrings.join("")
     }
     else {
-        return `<div class ="emptyInbox"> Hello! You have no messages in your inbox. </div>`
+        html = `<div class ="emptyInbox"> Hello! You have no messages in your inbox. </div>`
     }
+    html += `</div></div>`
+    return html
 }
 
-// comment
+
