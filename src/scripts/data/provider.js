@@ -138,7 +138,7 @@ export const sendPost = (postObj) => {
         body: JSON.stringify(postObj)
     }
     return fetch(`${apiURL}/posts`, fetchOptions)
-    .then(response => response.json)
+    .then(response => response.json())
     .then(
         () => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
@@ -155,7 +155,7 @@ export const sendLike = (likeObj) => {
         body: JSON.stringify(likeObj)
     }
     return fetch(`${apiURL}/likes`, fetchOptions)
-    .then(response => response.json)
+    .then(response => response.json())
     .then(
         () => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
@@ -172,12 +172,46 @@ export const sendMessage = (messageObj) => {
         body: JSON.stringify(messageObj)
     }
     return fetch(`${apiURL}/messages`, fetchOptions)
-    .then(response => response.json)
+    .then(response => response.json())
     .then(
         () => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         }
     )
+}
+
+export const sendUser = (userObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userObj)
+    }
+    return fetch(`${apiURL}/users`, fetchOptions)
+    .then(response => response.json())
+    .then(
+        (newUser) => {
+            applicationState.registerUser = false
+            localStorage.setItem("gg_user", newUser.id)
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+    // .then( 
+        // () => {
+        // const users = getUsers()
+        // const lastUser = users.pop()
+        // console.log('lastUser: ', lastUser);
+        
+
+
+        // localStorage.setItem("gg_user", lastUser.id)
+        // document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+        // }
+
+
+
+    // )
 }
 
 export const deletePost = (postId) => {

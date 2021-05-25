@@ -1,6 +1,5 @@
 import { getUsers, setRegisterUser } from "../data/provider.js"
 import { renderApp } from "../main.js"
-import { Register } from "./Register.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -55,6 +54,3 @@ export const LoginForm = () => {
             </div>
             `
         }
-        
-        // or
-        // <button id="registerButton">Register a new user</button>
