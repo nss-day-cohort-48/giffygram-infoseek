@@ -12,12 +12,31 @@ const applicationState = {
     feed: {
         chosenUser: null,
         displayFavorites: false,
+        chosenYear: null,
         displayMessages: false
     }
 }
 
 export const setCurrentUser = (id) => {
     return applicationState.currentUser = id
+}
+
+export const setChosenUser = (id) => {
+    applicationState.feed.chosenUser = id
+    applicationState.feed.displayFavorites = false
+    applicationState.feed.chosenYear = null
+}
+
+export const setDisplayFavorites = (boolean) => {
+    applicationState.feed.displayFavorites = boolean
+    applicationState.feed.chosenUser = null
+    applicationState.feed.chosenYear = null
+}
+
+export const setChosenYear = (year) => {
+    applicationState.feed.chosenYear = year
+    applicationState.feed.chosenUser = null
+    applicationState.feed.displayFavorites = false
 }
 
 export const getCurrentUser = () => {
@@ -42,6 +61,10 @@ export const getMessages = () => {
 
 export const getFollows = () => {
     return [...applicationState.follows]
+}
+
+export const getFeed = () => {
+    return { ...applicationState.feed }
 }
 
 export const fetchUsers = () => {

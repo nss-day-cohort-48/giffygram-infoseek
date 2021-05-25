@@ -8,7 +8,7 @@ export const MessageList = () => {
     const currentUser = getCurrentUser()
     const messages = getMessages()
 
-
+    
     const currentUserMessages = messages.filter(message => {
         if (message.recipientId === currentUser) {
             return true
