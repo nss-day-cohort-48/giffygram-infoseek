@@ -197,21 +197,6 @@ export const sendUser = (userObj) => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         }
     )
-    // .then( 
-        // () => {
-        // const users = getUsers()
-        // const lastUser = users.pop()
-        // console.log('lastUser: ', lastUser);
-        
-
-
-        // localStorage.setItem("gg_user", lastUser.id)
-        // document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
-        // }
-
-
-
-    // )
 }
 
 export const deletePost = (postId) => {
