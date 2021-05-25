@@ -1,7 +1,4 @@
-import { getCurrentUser, getMessages, setChosenUser, setChosenYear, setDisplayFavorites } from "../data/provider.js";
-import { PostList } from "../feed/PostList.js";
-import { MessageForm } from "../message/MessageForm.js";
-import { MessageList } from "../message/MessageList.js"
+import { getCurrentUser, getMessages, setDisplayMessages, setDisplayMessageForm, resetTransState } from "../data/provider.js";
 const applicationElement = document.querySelector(".giffygram")
 
 export const NavBar = () => {
@@ -30,34 +27,30 @@ export const NavBar = () => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logo") {
-        setChosenUser(null)
-        setDisplayFavorites(false)
-        setChosenYear(null)
+        resetTransState()
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessageIcon") {
-        applicationElement.innerHTML = `
-        ${NavBar()}
-        ${MessageForm()}
-        ${PostList()}
-        `
+        resetTransState()
+        setDisplayMessageForm(true)
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "unreadIcon") {
-        applicationElement.innerHTML = `
-        ${NavBar()}
-        ${MessageList()}
-        `
+        resetTransState()
+        setDisplayMessages(true)
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logout") {
+        resetTransState()
         localStorage.removeItem('gg_user')
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }

@@ -12,8 +12,7 @@ export const PostList = () => {
     const feed = getFeed()
     const chosenUser = feed.chosenUser
     const displayFavorites = feed.displayFavorites
-    const chosenYear = feed.chosenYear
-    const displayMessages = feed.displayMessages 
+    const chosenYear = feed.chosenYear 
 
     const sortedPosts = posts.sort((a,b) => b.timestamp - a.timestamp)
     let feedHTML = `${sortedPosts.map(Post).join("")}`
@@ -51,19 +50,3 @@ export const PostList = () => {
 return feedHTML
 
 }
-
-
-applicationElement.addEventListener(
-    "click",
-    event => {
-        if (event.target.id === "miniMode") {
-            applicationElement.innerHTML = `
-            ${NavBar()}
-            <div class="giffygram__feed">
-                ${PostEntry()}
-                ${PostList()}
-            </div>
-        `
-        }
-    }
-)

@@ -1,4 +1,4 @@
-import { getCurrentUser, sendPost } from "../data/provider.js";
+import { getCurrentUser, sendPost, setDisplayPostEntry } from "../data/provider.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -23,6 +23,7 @@ applicationElement.addEventListener(
     "click",
     event => {
         if (event.target.id === "newPost__cancel" ) {
+            setDisplayPostEntry(false)
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         } 
     }
@@ -45,7 +46,7 @@ applicationElement.addEventListener(
                 description: postDescription,
                 timestamp: postTimestamp
             }
-
+            setDisplayPostEntry(false)
             sendPost(postObject)
         } 
     }

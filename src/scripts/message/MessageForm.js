@@ -1,4 +1,4 @@
-import { getCurrentUser, getUsers, sendMessage } from "../data/provider.js";
+import { getCurrentUser, getUsers, sendMessage, setDisplayMessageForm } from "../data/provider.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -42,18 +42,21 @@ applicationElement.addEventListener("click", clickEvent => {
             read: false
         }
 
+        setDisplayMessageForm(false)
         sendMessage(sendtoAPI)
     }
 })
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__cancel") {
+        setDisplayMessageForm(false)
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__close") {
+        setDisplayMessageForm(false)
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })

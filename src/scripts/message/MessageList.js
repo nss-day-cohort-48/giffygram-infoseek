@@ -9,13 +9,13 @@ export const MessageList = () => {
     const messages = getMessages()
 
     let html = `<div class="messages"><div class="messageList">`
+
     const currentUserMessages = messages.filter(message => {
         if (message.recipientId === currentUser) {
-            return true
+            return message
         }
+    })
 
-    }
-    )
     if (currentUserMessages.length > 0) {
         const messageArrayOfStrings = currentUserMessages.map(messageObject => {
             const messageHTML = DirectMessage(messageObject)
