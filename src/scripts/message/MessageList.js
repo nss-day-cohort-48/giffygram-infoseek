@@ -4,21 +4,26 @@ import { getCurrentUser } from "../data/provider.js";
 
 
 export const MessageList = () => {
-  
+
     const currentUser = getCurrentUser()
     const messages = getMessages()
-    
 
-    const currentUserMessages = messages.filter(message => { 
+
+    const currentUserMessages = messages.filter(message => {
         if (message.recipientId === currentUser) {
             return true
         }
 
     }
     )
-    const messageArrayOfStrings = currentUserMessages.map(messageObject => {
-        const messageHTML = DirectMessage(messageObject)
-        return messageHTML 
-    })
-    return messageArrayOfStrings.join("")
+    if (currentUserMessages.length > 0) {
+        const messageArrayOfStrings = currentUserMessages.map(messageObject => {
+            const messageHTML = DirectMessage(messageObject)
+            return messageHTML
+        })
+        return messageArrayOfStrings.join("")
+    }
+    else {
+        return `<div class ="emptyInbox"> Hello! You have no messages in your inbox. </div>`
+    }
 }
