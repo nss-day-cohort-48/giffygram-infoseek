@@ -6,17 +6,14 @@ const applicationElement = document.querySelector(".giffygram")
 export const Post = (postObject) => {
 
     const users = getUsers()
-    let foundUser = users.find(userObject => {
-        if (userObject.id === postObject.userId) {
-            return userObject
-        }
-    })
+    let foundUser = users.find(user => user.id === postObject.userId)
 
     const timestamp = postObject.timestamp
 
     let likedPost = ""
+    const currentUser = getCurrentUser()
     const likes = getLikes()
-    const foundLike = likes.find(likeObj => postObject.id === likeObj.postId)
+    const foundLike = likes.find(like => postObject.id === like.postId && like.userId === currentUser)
     if (foundLike) {
         likedPost = `<div>
         <img id="favoritePost--${postObject.id}" class="actionIcon" src="/images/favorite-star-yellow.svg">
@@ -28,7 +25,6 @@ export const Post = (postObject) => {
     }
 
     let deletePost = ""
-    const currentUser = getCurrentUser()
     if (currentUser === postObject.userId) {
         deletePost = `<div>
         <img id="blockPost--${postObject.id}" class="actionIcon" src="/images/block.svg">
@@ -62,7 +58,8 @@ applicationElement.addEventListener("click", clickEvent => {
         const [, postIdString] = clickEvent.target.id.split("--")
         const postId = parseInt(postIdString)
         const likes = getLikes()
-        const foundLike = likes.find(likeObj => postId === likeObj.postId)
+        const currentUser = getCurrentUser()
+        const foundLike = likes.find(like => postId === like.postId && currentUser === like.userId)
 
         if (foundLike) {
             deleteLike(foundLike.id)
