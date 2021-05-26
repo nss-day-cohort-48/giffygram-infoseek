@@ -1,9 +1,20 @@
-import { getUsers, setChosenUser, setChosenYear, getFilters, setDisplayFavorites, setdisplayFollowing } from "../data/provider.js"
+import { getUsers, setChosenUser, setChosenYear, getFilters, setDisplayFavorites, setdisplayFollowing, getFollows } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
 export const Footer = () => {
+    const currentUser = parseInt(localStorage.getItem("gg_user")) 
     const users = getUsers()
+    const follows = getFollows()
+    const userFollows = follows.filter(follow => follow.userId === currentUser)
+    let followedUsers = []
+    for (const follow of userFollows) {
+        for (const user of users) {
+            if (user.id === follow.followingId) {
+                followedUsers.push(user)
+            }
+        }
+    }
     const filters = getFilters()
     
     let years = ""
@@ -43,7 +54,7 @@ export const Footer = () => {
             Posts by user
             <select id="userSelection" >
             <option value="following">Following</option>
-            ${users.map(u => {
+            ${followedUsers.map(u => {
                 if (filters.chosenUser === u.id) {
                     return `<option value="user--${u.id}" selected="selected">${u.name}</option>`
                 } else {
