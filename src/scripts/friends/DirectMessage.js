@@ -1,5 +1,4 @@
 import { getUsers, patchRead } from "../data/provider.js"
-const applicationElement = document.querySelector(".giffygram")
 
 export const DirectMessage = (message) => {
 
@@ -14,5 +13,11 @@ export const DirectMessage = (message) => {
         <div class="message__text">${message.text}</div>
     </div>
     `
+    const sendToAPI = {
+        id: message.id,
+        read: true
+    }
+    patchRead(sendToAPI)
+
     return directMessageHTML
 }
