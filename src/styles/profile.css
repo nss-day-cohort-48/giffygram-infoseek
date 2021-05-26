@@ -5,6 +5,7 @@
 
 .user__profile {
     display: flex;
+    flex-direction: column;
     width: 20rem;
     margin: 5rem auto;
     padding: 0.75rem 2rem 2rem 2rem;
@@ -20,4 +21,18 @@
 .profileName {
     margin-block-start: 0.25em;
     margin-block-end: 0;
+}
+
+.follows {
+    display: flex;
+    margin: 1rem auto;
+    justify-content: space-between;
+}
+
+.usersFollowing {
+    margin: 0 2rem;
+}
+
+.followers {
+    margin: 0 2rem;
 }

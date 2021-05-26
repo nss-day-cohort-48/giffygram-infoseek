@@ -10,37 +10,63 @@ export const UserProfile = () => {
     const currentUser = parseInt(localStorage.getItem("gg_user"))
     const follows = getFollows()
     const foundFollow = follows.find(follow => follow.userId === currentUser && follow.followingId === userProfileId)
-
-    if (currentUser === userProfileId) {
-    return `
-    <div class="user__profile">
-    <div class="userOptions">
-    <h3 class="profileName">${userProfile.name}</h3>
-    <p>${userProfile.email}</p>
-    <div>
-    </div>
-    `
-    } else if (foundFollow) {
-    return `
-    <div class="user__profile">
-    <div class="userOptions">
-    <h3 class="profileName">${userProfile.name}</h3>
-    <p>${userProfile.email}</p>
-    <button id="unfollow--${foundFollow.id}">Unfollow</button>
-    <div>
-    </div>
-    `        
-    } else {
-    return `
-    <div class="user__profile">
-    <div class="userOptions">
-    <h3 class="profileName">${userProfile.name}</h3>
-    <p>${userProfile.email}</p>
-    <button id="followUser--${userProfile.id}">Follow</button>
-    <div>
-    </div>
-    `
+    
+    const userProfileFollows = follows.filter(follow => follow.userId === userProfileId)
+    let userProfileUsersFollowing = []
+    for (const follow of userProfileFollows) {
+        for (const user of users) {
+            if (follow.followingId === user.id) {
+                userProfileUsersFollowing.push(user)
+            }
+        }
     }
+
+    const userProfileFollowedBy = follows.filter(follow => follow.followingId === userProfileId)
+    let userProfileFollowers = []
+    for (const follow of userProfileFollowedBy) {
+        for (const user of users) {
+            if (follow.userId === user.id) {
+                userProfileFollowers.push(user)
+            }
+        }
+    }
+
+    let followButton
+    if (currentUser === userProfileId) {
+        followButton = ""
+    } else if (foundFollow) {
+        followButton = `<button id="unfollow--${foundFollow.id}">Unfollow</button>`
+    } else {
+        followButton = `<button id="followUser--${userProfile.id}">Follow</button>`
+    }
+
+    return `
+    <div class="user__profile">
+    <div class="userOptions">
+    <h3 class="profileName">${userProfile.name}</h3>
+    <p>${userProfile.email}</p>
+    ${followButton}
+    </div>
+    <div class="follows">
+    <div class="usersFollowing">
+    Following:
+    ${userProfileUsersFollowing.map(user => {
+        return `
+        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
+    }).join("")
+    }
+    </div>
+    <div class="followers">
+    Followers:
+    ${userProfileFollowers.map(user => {
+        return `
+        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
+    }).join("")
+    }
+    </div>
+    </div>
+    </div>
+    `
 }
 
 applicationElement.addEventListener("click", clickEvent => {
