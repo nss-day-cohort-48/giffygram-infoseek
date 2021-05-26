@@ -10,6 +10,16 @@ export const UserProfile = () => {
     const currentUser = parseInt(localStorage.getItem("gg_user"))
     const follows = getFollows()
     const foundFollow = follows.find(follow => follow.userId === currentUser && follow.followingId === userProfileId)
+    
+    const userProfileFollows = follows.filter(follow => follow.userId === userProfileId)
+    let userProfileUsersFollowing = []
+    for (const follow of userProfileFollows) {
+        for (const user of users) {
+            if (follow.followingId === user.id) {
+                userProfileUsersFollowing.push(user)
+            }
+        }
+    }
 
     if (currentUser === userProfileId) {
     return `
@@ -17,7 +27,15 @@ export const UserProfile = () => {
     <div class="userOptions">
     <h3 class="profileName">${userProfile.name}</h3>
     <p>${userProfile.email}</p>
-    <div>
+    </div>
+    <div class="usersFollowing">
+    Following:
+    ${userProfileUsersFollowing.map(user => {
+        return `
+        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
+    }).join("")
+    }
+    </div>
     </div>
     `
     } else if (foundFollow) {
@@ -27,7 +45,15 @@ export const UserProfile = () => {
     <h3 class="profileName">${userProfile.name}</h3>
     <p>${userProfile.email}</p>
     <button id="unfollow--${foundFollow.id}">Unfollow</button>
-    <div>
+    </div>
+    <div class="usersFollowing">
+    Following:
+    ${userProfileUsersFollowing.map(user => {
+        return `
+        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
+    }).join("")
+    }
+    </div>
     </div>
     `        
     } else {
@@ -37,7 +63,15 @@ export const UserProfile = () => {
     <h3 class="profileName">${userProfile.name}</h3>
     <p>${userProfile.email}</p>
     <button id="followUser--${userProfile.id}">Follow</button>
-    <div>
+    </div>
+    <div class="usersFollowing">
+    Following:
+    ${userProfileUsersFollowing.map(user => {
+        return `
+        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
+    }).join("")
+    }
+    </div>
     </div>
     `
     }
