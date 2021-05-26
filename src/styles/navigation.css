@@ -69,3 +69,7 @@
 .user__search {
     margin: 0 0 0 1rem;
 }
+
+.search__icon {
+    cursor: pointer;
+}
