@@ -1,6 +1,6 @@
 import { GiffyGram } from "./GiffyGram.js"
 import { LoginForm } from "./auth/Login.js";
-import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers, getCurrentUser, getRegisterUser, setCurrentUser } from "./data/provider.js";
+import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers, getRegisterUser } from "./data/provider.js";
 import { Register } from "./auth/Register.js";
 
 const applicationElement = document.querySelector(".giffygram")
@@ -18,8 +18,6 @@ export const renderApp = () => {
                 const user = parseInt(localStorage.getItem("gg_user"))
                 
                 if (user) {
-                    setCurrentUser(user)
-                    const currentUser = getCurrentUser()
                     applicationElement.innerHTML = GiffyGram()
                 } else {
                     const registerStateChange = getRegisterUser()

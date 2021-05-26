@@ -1,21 +1,20 @@
 import { getMessages } from "../data/provider.js";
 import { DirectMessage } from "../friends/DirectMessage.js";
-import { getCurrentUser } from "../data/provider.js";
 
 
 export const MessageList = () => {
 
-    const currentUser = getCurrentUser()
+    const user = parseInt(localStorage.getItem("gg_user"))
     const messages = getMessages()
 
     let html = `<div class="messages"><div class="messageList">`
-    const currentUserMessages = messages.filter(message => {
-        if (message.recipientId === currentUser) {
-            return true
-        }
 
-    }
-    )
+    const currentUserMessages = messages.filter(message => {
+        if (message.recipientId === user) {
+            return message
+        }
+    })
+
     if (currentUserMessages.length > 0) {
         const messageArrayOfStrings = currentUserMessages.map(messageObject => {
             const messageHTML = DirectMessage(messageObject)

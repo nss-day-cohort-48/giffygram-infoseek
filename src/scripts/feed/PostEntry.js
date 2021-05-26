@@ -1,4 +1,4 @@
-import { getCurrentUser, sendPost } from "../data/provider.js";
+import { sendPost, setDisplayPostEntry } from "../data/provider.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -23,6 +23,7 @@ applicationElement.addEventListener(
     "click",
     event => {
         if (event.target.id === "newPost__cancel" ) {
+            setDisplayPostEntry(false)
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         } 
     }
@@ -36,16 +37,16 @@ applicationElement.addEventListener(
             const postURL = document.querySelector("input[name='postURL']").value
             const postDescription = document.querySelector("textarea[name='postDescription']").value
             const postTimestamp = Date.now()
-            const currentUser = getCurrentUser()
+            const user = parseInt(localStorage.getItem("gg_user"))
 
             const postObject = {
-                userId: currentUser,
+                userId: user,
                 title: postTitle,
                 gifURL: postURL,
                 description: postDescription,
                 timestamp: postTimestamp
             }
-
+            setDisplayPostEntry(false)
             sendPost(postObject)
         } 
     }

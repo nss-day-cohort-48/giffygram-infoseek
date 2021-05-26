@@ -8,28 +8,26 @@ const applicationState = {
     likes: [],
     messages: [],
     follows: [],
-    currentUser: {},
     feed: {
         chosenUser: null,
         displayFavorites: false,
         chosenYear: null,
+        displayPostEntry: false,
+        displayMessageForm: false,
         displayMessages: false
     },
-    filters: {},
     registerUser: false
 }
 
-export const getRegisterUser = () => {
-    return applicationState.registerUser
-}
+//set functions
 
-export const setRegisterUser = () => {
-    applicationState.registerUser = true
-    applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
-}
-
-export const setCurrentUser = (id) => {
-    return applicationState.currentUser = id
+export const resetTransState = () => {
+    applicationState.feed.chosenUser = null
+    applicationState.feed.displayFavorites = false
+    applicationState.feed.chosenYear = null
+    applicationState.feed.displayMessages = false
+    applicationState.feed.displayMessageForm = false
+    applicationState.feed.displayPostEntry = false
 }
 
 export const setChosenUser = (id) => {
@@ -50,9 +48,24 @@ export const setChosenYear = (year) => {
     applicationState.feed.displayFavorites = false
 }
 
-export const getCurrentUser = () => {
-    return applicationState.currentUser
+export const setDisplayPostEntry = (boolean) => {
+    applicationState.feed.displayPostEntry = boolean
 }
+
+export const setDisplayMessageForm = (boolean) => {
+    applicationState.feed.displayMessageForm = boolean
+}
+
+export const setDisplayMessages = (boolean) => {
+    applicationState.feed.displayMessages = boolean
+}
+
+export const setRegisterUser = () => {
+    applicationState.registerUser = true
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+//get functions
 
 export const getUsers = () => {
     return [...applicationState.users]
@@ -77,6 +90,12 @@ export const getFollows = () => {
 export const getFeed = () => {
     return { ...applicationState.feed }
 }
+
+export const getRegisterUser = () => {
+    return applicationState.registerUser
+}
+
+//fetch functions
 
 export const fetchUsers = () => {
     return fetch(`${apiURL}/users`) //accessing giffygram.json (whose address is stored in the apiURL const defined at the top of the page) /users
@@ -127,10 +146,31 @@ export const fetchFollows = () => {
                 applicationState.follows = follows
             }
         )
-}
+    }
+    
+//fetch POST functions
 
+export const sendUser = (userObj) => {
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userObj)
+        }
+        return fetch(`${apiURL}/users`, fetchOptions)
+        .then(response => response.json())
+        .then(
+            (newUser) => {
+                applicationState.registerUser = false
+                localStorage.setItem("gg_user", newUser.id)
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+    }
+    
 export const sendPost = (postObj) => {
-    const fetchOptions = {
+        const fetchOptions = {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -180,24 +220,7 @@ export const sendMessage = (messageObj) => {
     )
 }
 
-export const sendUser = (userObj) => {
-    const fetchOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userObj)
-    }
-    return fetch(`${apiURL}/users`, fetchOptions)
-    .then(response => response.json())
-    .then(
-        (newUser) => {
-            applicationState.registerUser = false
-            localStorage.setItem("gg_user", newUser.id)
-            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
-        }
-    )
-}
+//fetch DELETE functions
 
 export const deletePost = (postId) => {
     return fetch(`${apiURL}/posts/${postId}`, { method: "DELETE" })
