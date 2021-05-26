@@ -47,7 +47,9 @@ applicationElement.addEventListener("click", clickEvent => {
         const searchEntry = document.querySelector("input[id='userSearch']").value.toLowerCase()
         const users = getUsers()
         const foundUser = users.find(user => user.name.toLowerCase().includes(searchEntry))
-        if (foundUser) {
+        if (searchEntry === "") {
+            window.alert("Please enter a name to search")
+        } else if (foundUser) {
             resetFeed()
             setDisplayUserProfile(foundUser.id)
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
