@@ -19,10 +19,13 @@ export const NavBar = () => {
         <img id="search__icon" src="../../images/search_icon.png" alt="searchIcon">
         </div>
         <div class="navigation__item navigation__message">
-            <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message">
-            <div class="notification__count" id="unreadIcon">
-                ${messages.filter(message => message.recipientId === user && message.read === false).length}
-            </div>
+        <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message">
+        <div class="notification__count" id="unreadIcon">
+        ${messages.filter(message => message.recipientId === user && message.read === false).length}
+        </div>
+        </div>
+        <div class="navigation__item myProfile">
+        <button class="profileLink fakeLink" id="profile--${user}">My Profile</button>
         </div>
         <div class="navigation__item navigation__logout">
             <button id="logout" class="fakeLink">Logout</button>
