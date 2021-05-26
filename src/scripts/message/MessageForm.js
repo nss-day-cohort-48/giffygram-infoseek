@@ -1,4 +1,4 @@
-import { getCurrentUser, getUsers, sendMessage, setDisplayMessageForm } from "../data/provider.js";
+import { getUsers, sendMessage, setDisplayMessageForm } from "../data/provider.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -33,11 +33,11 @@ applicationElement.addEventListener("click", clickEvent => {
         const recipient = dropdown.options[dropdown.selectedIndex].value
         const [, recipientIdString] = recipient.split("--")
         const recipientId = parseInt(recipientIdString)
-        const currentUser = getCurrentUser()
+        const user = parseInt(localStorage.getItem("gg_user"))
 
         const sendtoAPI = {
             recipientId: recipientId,
-            userId: currentUser,
+            userId: user,
             text: text,
             read: false
         }

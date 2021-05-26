@@ -1,8 +1,8 @@
-import { getCurrentUser, getMessages, setDisplayMessages, setDisplayMessageForm, resetTransState } from "../data/provider.js";
+import { getMessages, setDisplayMessages, setDisplayMessageForm, resetTransState } from "../data/provider.js";
 const applicationElement = document.querySelector(".giffygram")
 
 export const NavBar = () => {
-    const current = getCurrentUser()
+    const user = parseInt(localStorage.getItem("gg_user"))
     const messages = getMessages()
     return `
     <nav class="navigation">
@@ -15,7 +15,7 @@ export const NavBar = () => {
         <div class="navigation__item navigation__message">
             <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message">
             <div class="notification__count" id="unreadIcon">
-                ${messages.filter(message => message.recipientId === current && message.read === false).length}
+                ${messages.filter(message => message.recipientId === user && message.read === false).length}
             </div>
         </div>
         <div class="navigation__item navigation__logout">

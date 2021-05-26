@@ -1,4 +1,4 @@
-import { getCurrentUser, sendPost, setDisplayPostEntry } from "../data/provider.js";
+import { sendPost, setDisplayPostEntry } from "../data/provider.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -37,10 +37,10 @@ applicationElement.addEventListener(
             const postURL = document.querySelector("input[name='postURL']").value
             const postDescription = document.querySelector("textarea[name='postDescription']").value
             const postTimestamp = Date.now()
-            const currentUser = getCurrentUser()
+            const user = parseInt(localStorage.getItem("gg_user"))
 
             const postObject = {
-                userId: currentUser,
+                userId: user,
                 title: postTitle,
                 gifURL: postURL,
                 description: postDescription,

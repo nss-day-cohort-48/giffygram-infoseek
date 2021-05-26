@@ -8,7 +8,6 @@ const applicationState = {
     likes: [],
     messages: [],
     follows: [],
-    currentUser: {},
     feed: {
         chosenUser: null,
         displayFavorites: false,
@@ -29,10 +28,6 @@ export const resetTransState = () => {
     applicationState.feed.displayMessages = false
     applicationState.feed.displayMessageForm = false
     applicationState.feed.displayPostEntry = false
-}
-
-export const setCurrentUser = (id) => {
-    return applicationState.currentUser = id
 }
 
 export const setChosenUser = (id) => {
@@ -90,10 +85,6 @@ export const getMessages = () => {
 
 export const getFollows = () => {
     return [...applicationState.follows]
-}
-
-export const getCurrentUser = () => {
-    return applicationState.currentUser
 }
 
 export const getFeed = () => {

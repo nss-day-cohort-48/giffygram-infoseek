@@ -1,19 +1,19 @@
-import { deleteLike, deletePost, getCurrentUser, getLikes, getUsers, sendLike } from "../data/provider.js"
+import { deleteLike, deletePost, getLikes, getUsers, sendLike } from "../data/provider.js"
 const applicationElement = document.querySelector(".giffygram")
 
 
 // function that returns html for post
 export const Post = (postObject) => {
 
+    const user = parseInt(localStorage.getItem("gg_user"))
     const users = getUsers()
-    let foundUser = users.find(user => user.id === postObject.userId)
+    let postUser = users.find(user => user.id === postObject.userId)
 
     const timestamp = postObject.timestamp
 
     let likedPost = ""
-    const currentUser = getCurrentUser()
     const likes = getLikes()
-    const foundLike = likes.find(like => postObject.id === like.postId && like.userId === currentUser)
+    const foundLike = likes.find(like => postObject.id === like.postId && like.userId === user)
     if (foundLike) {
         likedPost = `<div>
         <img id="favoritePost--${postObject.id}" class="actionIcon" src="/images/favorite-star-yellow.svg">
@@ -25,7 +25,7 @@ export const Post = (postObject) => {
     }
 
     let deletePost = ""
-    if (currentUser === postObject.userId) {
+    if (user === postObject.userId) {
         deletePost = `<div>
         <img id="blockPost--${postObject.id}" class="actionIcon" src="/images/block.svg">
         </div>`
@@ -40,7 +40,7 @@ export const Post = (postObject) => {
         ${postObject.description}
         </div>
         <div class="post__tagline">
-        Posted by ${foundUser.name} on ${new Date(timestamp).toLocaleDateString("en-US")}
+        Posted by ${postUser.name} on ${new Date(timestamp).toLocaleDateString("en-US")}
         </div>
         <div class="post__actions">
         ${likedPost}
@@ -58,16 +58,18 @@ applicationElement.addEventListener("click", clickEvent => {
         const [, postIdString] = clickEvent.target.id.split("--")
         const postId = parseInt(postIdString)
         const likes = getLikes()
-        const currentUser = getCurrentUser()
-        const foundLike = likes.find(like => postId === like.postId && currentUser === like.userId)
+        const user = parseInt(localStorage.getItem("gg_user"))
+        const foundLike = likes.find(like => postId === like.postId && user === like.userId)
 
         if (foundLike) {
+            
             deleteLike(foundLike.id)
+
         } else {
-            const currentUser = getCurrentUser()
+
             const sendToAPI = {
                 postId: postId,
-                userId: currentUser
+                userId: user
             }
             sendLike(sendToAPI)
         }
