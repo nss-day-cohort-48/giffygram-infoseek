@@ -1,4 +1,4 @@
-import { deleteLike, deletePost, getLikes, getUsers, sendLike } from "../data/provider.js"
+import { deleteLike, deletePost, getLikes, getUsers, sendLike, resetFeed, setDisplayUserProfile } from "../data/provider.js"
 const applicationElement = document.querySelector(".giffygram")
 
 
@@ -87,8 +87,8 @@ applicationElement.addEventListener("click", clickEvent => {
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id.startsWith("profile--")) {
         const [, profileId] = clickEvent.target.id.split("--")
-        resetTransState()
-        setUserProfile(parseInt(profileId))
+        resetFeed()
+        setDisplayUserProfile(parseInt(profileId))
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })

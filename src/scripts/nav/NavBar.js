@@ -1,4 +1,4 @@
-import { getMessages, setDisplayMessages, setDisplayMessageForm, resetTransState } from "../data/provider.js";
+import { getMessages, setDisplayMessages, setDisplayMessageForm, resetFeed, resetFilters } from "../data/provider.js";
 const applicationElement = document.querySelector(".giffygram")
 
 export const NavBar = () => {
@@ -27,14 +27,15 @@ export const NavBar = () => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logo") {
-        resetTransState()
+        resetFeed()
+        resetFilters()
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessageIcon") {
-        resetTransState()
+        resetFeed()
         setDisplayMessageForm(true)
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
@@ -42,7 +43,7 @@ applicationElement.addEventListener("click", clickEvent => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "unreadIcon") {
-        resetTransState()
+        resetFeed()
         setDisplayMessages(true)
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
@@ -50,7 +51,8 @@ applicationElement.addEventListener("click", clickEvent => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logout") {
-        resetTransState()
+        resetFeed()
+        resetFilters()
         localStorage.removeItem('gg_user')
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
