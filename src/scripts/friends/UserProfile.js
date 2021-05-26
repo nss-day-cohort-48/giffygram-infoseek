@@ -21,6 +21,16 @@ export const UserProfile = () => {
         }
     }
 
+    const userProfileFollowedBy = follows.filter(follow => follow.followingId === userProfileId)
+    let userProfileFollowers = []
+    for (const follow of userProfileFollowedBy) {
+        for (const user of users) {
+            if (follow.userId === user.id) {
+                userProfileFollowers.push(user)
+            }
+        }
+    }
+
     let followButton
     if (currentUser === userProfileId) {
         followButton = ""
@@ -37,6 +47,7 @@ export const UserProfile = () => {
     <p>${userProfile.email}</p>
     ${followButton}
     </div>
+    <div class="follows">
     <div class="usersFollowing">
     Following:
     ${userProfileUsersFollowing.map(user => {
@@ -44,6 +55,15 @@ export const UserProfile = () => {
         <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
     }).join("")
     }
+    </div>
+    <div class="followers">
+    Followers:
+    ${userProfileFollowers.map(user => {
+        return `
+        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
+    }).join("")
+    }
+    </div>
     </div>
     </div>
     `

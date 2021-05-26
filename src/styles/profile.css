@@ -23,6 +23,16 @@
     margin-block-end: 0;
 }
 
+.follows {
+    display: flex;
+    margin: 1rem auto;
+    justify-content: space-between;
+}
+
 .usersFollowing {
-    margin: 2rem auto;
+    margin: 0 2rem;
+}
+
+.followers {
+    margin: 0 2rem;
 }
