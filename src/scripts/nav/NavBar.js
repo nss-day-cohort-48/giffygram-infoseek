@@ -18,6 +18,9 @@ export const NavBar = () => {
         <div class="search__icon">
         <img id="search__icon" src="../../images/search_icon.png" alt="searchIcon">
         </div>
+        <div class="navigation__item navigation__logout myProfile">
+        <button class="profileLink fakeLink" id="profile--${user.id}">My Profile</button>
+        </div>
         <div class="navigation__item navigation__message">
             <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message">
             <div class="notification__count" id="unreadIcon">
