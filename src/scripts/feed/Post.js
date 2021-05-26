@@ -1,4 +1,4 @@
-import { deleteLike, deletePost, getLikes, getUsers, sendLike } from "../data/provider.js"
+import { deleteLike, deletePost, getLikes, getUsers, sendLike, resetFeed, setDisplayUserProfile } from "../data/provider.js"
 const applicationElement = document.querySelector(".giffygram")
 
 
@@ -40,7 +40,7 @@ export const Post = (postObject) => {
         ${postObject.description}
         </div>
         <div class="post__tagline">
-        Posted by ${postUser.name} on ${new Date(timestamp).toLocaleDateString("en-US")}
+        Posted by <span class="profileLink" id="profile--${postUser.id}">${postUser.name}</span> on ${new Date(timestamp).toLocaleDateString("en-US")}
         </div>
         <div class="post__actions">
         ${likedPost}
@@ -81,5 +81,14 @@ applicationElement.addEventListener("click", clickEvent => {
         const [, postIdString] = clickEvent.target.id.split("--")
         const postId = parseInt(postIdString)
         deletePost(postId)
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id.startsWith("profile--")) {
+        const [, profileId] = clickEvent.target.id.split("--")
+        resetFeed()
+        setDisplayUserProfile(parseInt(profileId))
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })

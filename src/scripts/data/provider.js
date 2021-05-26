@@ -9,43 +9,54 @@ const applicationState = {
     messages: [],
     follows: [],
     feed: {
+        displayPostEntry: false,
+        displayMessageForm: false,
+        displayMessages: false,
+        userProfile: null
+    },
+    filters: {
+        displayFollowing: true,
         chosenUser: null,
         displayFavorites: false,
         chosenYear: null,
-        displayPostEntry: false,
-        displayMessageForm: false,
-        displayMessages: false
     },
     registerUser: false
 }
 
 //set functions
 
-export const resetTransState = () => {
-    applicationState.feed.chosenUser = null
-    applicationState.feed.displayFavorites = false
-    applicationState.feed.chosenYear = null
-    applicationState.feed.displayMessages = false
-    applicationState.feed.displayMessageForm = false
+export const resetFeed = () => {
     applicationState.feed.displayPostEntry = false
+    applicationState.feed.displayMessageForm = false
+    applicationState.feed.displayMessages = false
+    applicationState.feed.userProfile = null
+}
+
+export const resetFilters = () => {
+    applicationState.filters.displayFollowing = true
+    applicationState.filters.chosenUser = false
+    applicationState.filters.displayFavorites = false
+    applicationState.filters.chosenYear = null
+}
+
+export const setdisplayFollowing = (boolean) => {
+    resetFilters()
+    applicationState.filters.displayFollowing = boolean
 }
 
 export const setChosenUser = (id) => {
-    applicationState.feed.chosenUser = id
-    applicationState.feed.displayFavorites = false
-    applicationState.feed.chosenYear = null
+    resetFilters()
+    applicationState.filters.chosenUser = id
 }
 
 export const setDisplayFavorites = (boolean) => {
-    applicationState.feed.displayFavorites = boolean
-    applicationState.feed.chosenUser = null
-    applicationState.feed.chosenYear = null
+    resetFilters()
+    applicationState.filters.displayFavorites = boolean
 }
 
 export const setChosenYear = (year) => {
-    applicationState.feed.chosenYear = year
-    applicationState.feed.chosenUser = null
-    applicationState.feed.displayFavorites = false
+    resetFilters()
+    applicationState.filters.chosenYear = year
 }
 
 export const setDisplayPostEntry = (boolean) => {
@@ -58,6 +69,10 @@ export const setDisplayMessageForm = (boolean) => {
 
 export const setDisplayMessages = (boolean) => {
     applicationState.feed.displayMessages = boolean
+}
+
+export const setDisplayUserProfile = (id) => {
+    applicationState.feed.userProfile = id
 }
 
 export const setRegisterUser = () => {
@@ -89,6 +104,10 @@ export const getFollows = () => {
 
 export const getFeed = () => {
     return { ...applicationState.feed }
+}
+
+export const getFilters = () => {
+    return {...applicationState.filters}
 }
 
 export const getRegisterUser = () => {
@@ -220,6 +239,23 @@ export const sendMessage = (messageObj) => {
     )
 }
 
+export const sendFollow = (followObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(followObj)
+    }
+    return fetch(`${apiURL}/follows`, fetchOptions)
+    .then(response => response.json())
+    .then(
+        () => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+}
+
 //fetch DELETE functions
 
 export const deletePost = (postId) => {
@@ -233,6 +269,15 @@ export const deletePost = (postId) => {
 
 export const deleteLike = (likeId) => {
     return fetch(`${apiURL}/likes/${likeId}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const deleteFollow = (followId) => {
+    return fetch(`${apiURL}/follows/${followId}`, { method: "DELETE" })
         .then(
             () => {
                 applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
