@@ -284,3 +284,15 @@ export const deleteFollow = (followId) => {
             }
         )
 }
+
+export const patchRead = (readObj) => {
+    const fetchOptions = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(readObj)
+    }
+    return fetch(`${apiURL}/messages/${readObj.id}`, fetchOptions)
+    .then(response => response.json())
+}
