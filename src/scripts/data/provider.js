@@ -8,14 +8,15 @@ const applicationState = {
     likes: [],
     messages: [],
     follows: [],
-    currentUser: {},
+    currentUser: null,
     feed: {
         chosenUser: null,
         displayFavorites: false,
         chosenYear: null,
         displayPostEntry: false,
         displayMessageForm: false,
-        displayMessages: false
+        displayMessages: false,
+        userProfile: null
     },
     registerUser: false
 }
@@ -26,9 +27,10 @@ export const resetTransState = () => {
     applicationState.feed.chosenUser = null
     applicationState.feed.displayFavorites = false
     applicationState.feed.chosenYear = null
-    applicationState.feed.displayMessages = false
-    applicationState.feed.displayMessageForm = false
     applicationState.feed.displayPostEntry = false
+    applicationState.feed.displayMessageForm = false
+    applicationState.feed.displayMessages = false
+    applicationState.feed.userProfile = null
 }
 
 export const setCurrentUser = (id) => {
@@ -63,6 +65,10 @@ export const setDisplayMessageForm = (boolean) => {
 
 export const setDisplayMessages = (boolean) => {
     applicationState.feed.displayMessages = boolean
+}
+
+export const setUserProfile = (id) => {
+    applicationState.feed.userProfile = id
 }
 
 export const setRegisterUser = () => {

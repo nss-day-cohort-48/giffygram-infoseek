@@ -5,6 +5,7 @@ import { getFeed, setDisplayPostEntry } from "./data/provider.js";
 import { MessageList } from "./message/MessageList.js";
 import { MessageForm } from "./message/MessageForm.js";
 import { PostEntry } from "./feed/PostEntry.js";
+import { UserProfile } from "./friends/UserProfile.js";
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -16,6 +17,7 @@ export const GiffyGram = () => {
     const displayMessages = feed.displayMessages
     const displayMessageForm = feed.displayMessageForm
     const displayPostEntry = feed.displayPostEntry
+    const userProfile = feed.userProfile
 
     let giffyHTML
     
@@ -37,6 +39,11 @@ export const GiffyGram = () => {
         ${PostList()}
         </div>
         ${Footer()}
+        `
+    } else if (userProfile) {
+        giffyHTML = `
+        ${NavBar()}
+        ${UserProfile()}
         `
     } else {
         giffyHTML = `
