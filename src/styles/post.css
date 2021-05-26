@@ -72,3 +72,8 @@
     font-size: 2em;
     margin: 1em 0 0.5em 0;
 }
+
+.noFollowedUsers {
+    display: block;
+    margin: 4rem auto;
+}

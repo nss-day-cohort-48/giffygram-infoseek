@@ -66,7 +66,7 @@ export const PostList = () => {
         feedHTML = `${sortedFollowingPosts.map(Post).join("")}`
 
     } else {
-        feedHTML = `<div>You aren't following anyone.  Find some friends to follow in the "Everyone" post feed.</div>`
+        feedHTML = `<div class="noFollowedUsers">You aren't following anyone.  Find some friends to follow in the "Everyone" post feed.</div>`
     }
 
 return feedHTML
