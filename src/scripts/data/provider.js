@@ -235,6 +235,23 @@ export const sendMessage = (messageObj) => {
     )
 }
 
+export const sendFollow = (followObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(followObj)
+    }
+    return fetch(`${apiURL}/follows`, fetchOptions)
+    .then(response => response.json())
+    .then(
+        () => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        }
+    )
+}
+
 //fetch DELETE functions
 
 export const deletePost = (postId) => {
@@ -248,6 +265,15 @@ export const deletePost = (postId) => {
 
 export const deleteLike = (likeId) => {
     return fetch(`${apiURL}/likes/${likeId}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const deleteFollow = (followId) => {
+    return fetch(`${apiURL}/follows/${followId}`, { method: "DELETE" })
         .then(
             () => {
                 applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
