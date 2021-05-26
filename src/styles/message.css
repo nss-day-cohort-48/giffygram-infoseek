@@ -45,6 +45,10 @@
     justify-content: center;
 }
 
+.message__author {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 .message {
     border: 1px dotted lightblue;
     padding: 2rem;
@@ -52,9 +56,30 @@
     box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
     margin: 0 25%;
     flex-basis: 50%;
+    text-align: center;
 }
 
-.message__author {
-    font-weight: bold;
-    margin-bottom: 1rem;
+.message:hover {
+    border: 1px dotted lightblue;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
+    margin: 0 25%;
+    flex-basis: 50%;
+    text-align: center;
+    background-color: rgb(210, 224, 243);
+}
+
+@keyframes mymove {
+  50% {border-color: rgb(69, 137, 214);}
+}
+
+.read--false {
+    border: 3px solid rgb(169, 196, 228);
+    animation: mymove 1s infinite;
+}
+
+.read--false:hover {
+    border: 3px solid rgb(81, 153, 235);
+    animation: mymove 1s infinite;
 }
