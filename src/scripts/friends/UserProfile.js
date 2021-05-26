@@ -21,48 +21,21 @@ export const UserProfile = () => {
         }
     }
 
+    let followButton
     if (currentUser === userProfileId) {
-    return `
-    <div class="user__profile">
-    <div class="userOptions">
-    <h3 class="profileName">${userProfile.name}</h3>
-    <p>${userProfile.email}</p>
-    </div>
-    <div class="usersFollowing">
-    Following:
-    ${userProfileUsersFollowing.map(user => {
-        return `
-        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
-    }).join("")
-    }
-    </div>
-    </div>
-    `
+        followButton = ""
     } else if (foundFollow) {
-    return `
-    <div class="user__profile">
-    <div class="userOptions">
-    <h3 class="profileName">${userProfile.name}</h3>
-    <p>${userProfile.email}</p>
-    <button id="unfollow--${foundFollow.id}">Unfollow</button>
-    </div>
-    <div class="usersFollowing">
-    Following:
-    ${userProfileUsersFollowing.map(user => {
-        return `
-        <div class="profileLink" id="profile--${user.id}">${user.name}</div>`
-    }).join("")
-    }
-    </div>
-    </div>
-    `        
+        followButton = `<button id="unfollow--${foundFollow.id}">Unfollow</button>`
     } else {
+        followButton = `<button id="followUser--${userProfile.id}">Follow</button>`
+    }
+
     return `
     <div class="user__profile">
     <div class="userOptions">
     <h3 class="profileName">${userProfile.name}</h3>
     <p>${userProfile.email}</p>
-    <button id="followUser--${userProfile.id}">Follow</button>
+    ${followButton}
     </div>
     <div class="usersFollowing">
     Following:
@@ -74,7 +47,6 @@ export const UserProfile = () => {
     </div>
     </div>
     `
-    }
 }
 
 applicationElement.addEventListener("click", clickEvent => {
