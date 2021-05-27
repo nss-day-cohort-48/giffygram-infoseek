@@ -51,10 +51,18 @@ export const PostList = () => {
         const sortedLikedPosts = likedPosts.sort((a,b) => b.timestamp - a.timestamp)
         feedHTML = `${sortedLikedPosts.map(Post).join("")}`
 
-    } else if (displayFollowing === true & usersFollows.length > 0) {
-
+    } else if (displayFollowing === true && usersFollows.length > 0) {
+        //defining an array that will store all the posts by the user and the users they follow
         const followingPosts = []
+        //adding user's posts to the followingPosts array
+        for (const post of posts) {
+            if (post.userId === user) {
+                followingPosts.push(post)
+            }
+        }
+        //finding all of the follows the user has and storing them in userFollowing
         const userFollowing = follows.filter(follow => user === follow.userId)
+        //adding the posts of all the users that the user follows to the followingPosts array
         for (const followObj of userFollowing) {
             for (const post of posts) {
                 if (post.userId === followObj.followingId) {
@@ -66,7 +74,9 @@ export const PostList = () => {
         feedHTML = `${sortedFollowingPosts.map(Post).join("")}`
 
     } else {
-        feedHTML = `<div class="noFollowedUsers">You aren't following anyone.  Find some friends to follow in the "Everyone" post feed.</div>`
+        const userPosts = sortedPosts.filter(post => post.userId === user)
+        feedHTML = `<div class="noFollowedUsers">You aren't following anyone.  Find some friends to follow in the "Everyone" feed.</div>
+                    ${userPosts.map(Post).join("")}`
     }
 
 return feedHTML
