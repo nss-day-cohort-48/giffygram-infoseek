@@ -1,4 +1,4 @@
-import { sendUser } from "../data/provider.js"
+import { sendFollow, sendUser } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 

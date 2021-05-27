@@ -51,9 +51,14 @@ export const PostList = () => {
         const sortedLikedPosts = likedPosts.sort((a,b) => b.timestamp - a.timestamp)
         feedHTML = `${sortedLikedPosts.map(Post).join("")}`
 
-    } else if (displayFollowing === true & usersFollows.length > 0) {
+    } else if (displayFollowing === true && usersFollows.length > 0) {
 
         const followingPosts = []
+        for (const post of posts) {
+            if (post.userId === user) {
+                followingPosts.push(post)
+            }
+        }
         const userFollowing = follows.filter(follow => user === follow.userId)
         for (const followObj of userFollowing) {
             for (const post of posts) {
